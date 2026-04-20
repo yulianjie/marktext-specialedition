@@ -1,6 +1,6 @@
 import loadRenderer from '../../renderers'
-import { CLASS_OR_ID, PREVIEW_DOMPURIFY_CONFIG } from '../../config'
-import { conflict, mixins, camelToSnake, sanitize } from '../../utils'
+import { CLASS_OR_ID } from '../../config'
+import { conflict, mixins, camelToSnake } from '../../utils'
 import { patch, toVNode, toHTML, h } from './snabbdom'
 import { beginRules } from '../rules'
 import renderInlines from './renderInlines'
@@ -102,6 +102,7 @@ class StateRender {
         securityLevel: 'loose',
         theme: this.muya.options.mermaidTheme
       })
+      let renderIndex = 0
       for (const [key, value] of this.mermaidCache.entries()) {
         const { code } = value
         const target = document.querySelector(key)
@@ -109,9 +110,9 @@ class StateRender {
           continue
         }
         try {
-          mermaid.parse(code)
-          target.innerHTML = sanitize(code, PREVIEW_DOMPURIFY_CONFIG, true)
-          mermaid.init(undefined, target)
+          const renderID = `mermaid-render-${Date.now()}-${renderIndex++}`
+          const { svg } = await mermaid.render(renderID, code)
+          target.innerHTML = svg
         } catch (err) {
           target.innerHTML = '< Invalid Mermaid Codes >'
           target.classList.add(CLASS_OR_ID.AG_MATH_ERROR)

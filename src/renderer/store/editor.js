@@ -868,6 +868,7 @@ const actions = {
 
     const { markdown, isMixedLineEndings } = markdownDocument
     const docState = createDocumentState(Object.assign(markdownDocument, options))
+    docState.pendingBaselineUpdate = true
     const { id, cursor } = docState
 
     if (selected) {
@@ -935,6 +936,14 @@ const actions = {
     markdown = adjustTrailingNewlines(markdown, trimTrailingNewline)
     commit('SET_MARKDOWN', markdown)
 
+    // After initial load, the editor re-exports markdown from its internal block
+    // structure which may differ from the original file content due to formatting
+    // normalization. Update the baseline so only real user edits trigger dirty state.
+    const isBaselineUpdate = state.currentFile.pendingBaselineUpdate
+    if (isBaselineUpdate) {
+      state.currentFile.pendingBaselineUpdate = false
+    }
+
     // Ignore new line which is added if the editor text is empty (#422)
     if (oldMarkdown.length === 0 && markdown.length === 1 && markdown[0] === '\n') {
       return
@@ -958,7 +967,7 @@ const actions = {
     }
 
     // Change save status/save to file only when the markdown changed!
-    if (markdown !== oldMarkdown) {
+    if (!isBaselineUpdate && markdown !== oldMarkdown) {
       commit('SET_SAVE_STATUS', false)
 
       // Save file is auto save is enable and file exist on disk.

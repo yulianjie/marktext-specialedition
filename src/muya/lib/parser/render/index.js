@@ -99,7 +99,7 @@ class StateRender {
     if (this.mermaidCache.size) {
       const mermaid = await loadRenderer('mermaid')
       mermaid.initialize({
-        securityLevel: 'strict',
+        securityLevel: 'loose',
         theme: this.muya.options.mermaidTheme
       })
       for (const [key, value] of this.mermaidCache.entries()) {

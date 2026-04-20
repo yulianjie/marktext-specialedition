@@ -8,6 +8,7 @@ import { getUniqueId, cloneObj } from '../util'
 export const defaultFileState = {
   // Indicates whether there are unsaved changes.
   isSaved: true,
+  pendingBaselineUpdate: false,
   // Full path to the file or empty. If the value is empty the file doesn't exist on disk.
   pathname: '',
   filename: 'Untitled-1',

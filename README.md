@@ -17,15 +17,22 @@
 
 ## 更新历史
 > 感谢[Ran Luo](https://github.com/Jocs)及其他贡献者的贡献，您如果喜欢原始的MarkText，请访问[原始仓库](https://github.com/marktext/marktext)
+
+- v1.0.1 (2026-04-20)
+  - 修复打开文件未编辑即被标记为"未保存"的问题
+  - Mermaid 升级至 10.9.5，修复流程图文字不显示的问题
+  - 移除不再需要的 `@mermaid-js/mermaid-mindmap` 插件（mindmap 已合入 mermaid 主线）
+  - 修复 snabbdom、mermaid 等 ESM 模块在 Electron 中的兼容性问题
+  - 修复 cytoscape 模块 exports 解析失败导致构建报错的问题
+  - Windows 构建目标调整为仅 x64
+  - 详细开发日志见 [develop.md](./develop.md)
 - v1.0.0beta发布，包含win_x64、MacOS x64、Arm64等版本；
 
 ## 已实现特色
 
 - 优化样式，提升空间利用率及操作体验；
 
-- Mermaid更新到较新版本；
-
-- 增加 Mermaid mindmap的支持；
+- Mermaid 升级至 10.9.5，内置支持 mindmap、flowchart 等全部图表类型；
 
 - 修改为中文版本，感谢[chinayangxiaowei](https://github.com/chinayangxiaowei/marktext-chinese-language-pack)提供的思路；
 

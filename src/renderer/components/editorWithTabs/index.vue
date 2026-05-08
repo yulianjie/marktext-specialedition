@@ -1,7 +1,7 @@
 <template>
     <div
       class="editor-with-tabs"
-      :style="{'max-width': showSideBar ? `calc(100vw - ${sideBarWidth}px` : '100vw' }"
+      :style="{'max-width': `calc(100vw - ${effectiveSideBarWidth}px)` }"
     >
       <tabs v-show="showTabBar"></tabs>
       <div class="container">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Tabs from './tabs.vue'
 import Editor from './editor.vue'
 import SourceCode from './sourceCode.vue'
@@ -68,7 +68,8 @@ export default {
     ...mapState({
       showSideBar: state => state.layout.showSideBar,
       sideBarWidth: state => state.layout.sideBarWidth
-    })
+    }),
+    ...mapGetters(['effectiveSideBarWidth'])
   }
 }
 </script>

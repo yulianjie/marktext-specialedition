@@ -3,7 +3,7 @@
     v-if="currentNotification"
     class="editor-notifications"
     :class="currentNotification.style"
-    :style="{'max-width': showSideBar ? `calc(100vw - ${sideBarWidth}px` : '100vw' }"
+    :style="{'max-width': `calc(100vw - ${effectiveSideBarWidth}px)` }"
   >
     <div class="msg">
       {{ currentNotification.msg }}
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -43,6 +43,7 @@ export default {
       showSideBar: state => state.layout.showSideBar,
       sideBarWidth: state => state.layout.sideBarWidth
     }),
+    ...mapGetters(['effectiveSideBarWidth']),
     currentNotification () {
       const notifications = this.currentFile.notifications
       if (!notifications || notifications.length === 0) {

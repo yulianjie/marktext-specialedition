@@ -18,6 +18,15 @@
 ## 更新历史
 > 感谢[Ran Luo](https://github.com/Jocs)及其他贡献者的贡献，您如果喜欢原始的MarkText，请访问[原始仓库](https://github.com/marktext/marktext)
 
+- v1.0.4 (2026-05-14)
+  - 新增**用户自定义主题**支持：将 `.css` 主题文件放入用户数据目录下的 `themes/` 文件夹（Windows 路径为 `%APPDATA%\MarkText\themes\`），重启或在"偏好设置 → 主题"中点击"重新加载"即可生效
+  - 偏好设置面板新增"打开文件夹"与"重新加载"按钮；主题菜单与设置卡片均会自动列出用户主题
+  - 自定义主题支持文件首部元数据注释 `/* @name 显示名 */` 和 `/* @type light|dark */`，详见首次启动自动生成的 `themes/README.md`
+  - 新增 3 个现代化内置主题：
+    - **Minimalist**：纯净留白 + 衬线字体的极简书写界面
+    - **Frosted Glass**：极光渐变背景 + `backdrop-filter` 毛玻璃面板
+    - **macOS**：SF Pro 系统字体 + 系统蓝强调色 + Safari 风格胶囊标签页
+  - 构建脚手架：`electron-builder.yml` 加入 `npmRebuild: false`，打包时直接使用 `node_modules` 中已存在的原生模块二进制，避免本机缺少 Visual Studio Spectre 缓解库时打包失败（升级 Electron 后需手动跑 `electron-builder install-app-deps`）
 - v1.0.1 (2026-04-20)
   - 修复打开文件未编辑即被标记为"未保存"的问题
   - Mermaid 升级至 10.9.5，修复流程图文字不显示的问题

@@ -1,0 +1,197 @@
+/*
+ * Frosted Glass — blurred translucent surfaces over a colored aurora background.
+ * NOTE: relies on `backdrop-filter`. On non-Chromium WebViews this falls back to flat translucency.
+ */
+:root {
+  --themeColor: #7b5cff;
+  --themeColor90: rgba(123, 92, 255, .9);
+  --themeColor80: rgba(123, 92, 255, .8);
+  --themeColor70: rgba(123, 92, 255, .7);
+  --themeColor60: rgba(123, 92, 255, .6);
+  --themeColor50: rgba(123, 92, 255, .5);
+  --themeColor40: rgba(123, 92, 255, .4);
+  --themeColor30: rgba(123, 92, 255, .3);
+  --themeColor20: rgba(123, 92, 255, .2);
+  --themeColor10: rgba(123, 92, 255, .1);
+
+  --highlightColor: rgba(123, 92, 255, .35);
+  --selectionColor: rgba(123, 92, 255, .18);
+  --editorColor: rgba(28, 25, 46, .88);
+  --editorColor80: rgba(28, 25, 46, .8);
+  --editorColor60: rgba(28, 25, 46, .6);
+  --editorColor50: rgba(28, 25, 46, .5);
+  --editorColor40: rgba(28, 25, 46, .4);
+  --editorColor30: rgba(28, 25, 46, .3);
+  --editorColor10: rgba(28, 25, 46, .08);
+  --editorColor04: rgba(28, 25, 46, .04);
+  --editorBgColor: rgba(255, 255, 255, .55);
+  --deleteColor: #ff5d8f;
+  --iconColor: rgba(28, 25, 46, .55);
+  --codeBgColor: rgba(255, 255, 255, .55);
+  --codeBlockBgColor: rgba(255, 255, 255, .45);
+  --footnoteBgColor: rgba(255, 255, 255, .35);
+  --inputBgColor: rgba(255, 255, 255, .55);
+  --focusColor: var(--themeColor);
+
+  --buttonFontColor: rgba(28, 25, 46, .9);
+  --buttonBgColor: rgba(255, 255, 255, .55);
+  --buttonBorder: 1px solid rgba(255, 255, 255, .6);
+  --buttonShadow: 0 4px 16px -8px rgba(28, 25, 46, .25);
+  --buttonFontColorHover: rgba(28, 25, 46, .9);
+  --buttonBgColorHover: rgba(255, 255, 255, .75);
+  --buttonBorderHover: 1px solid rgba(255, 255, 255, .8);
+  --buttonFontColorActive: rgba(28, 25, 46, .9);
+  --buttonBgColorActive: rgba(255, 255, 255, .85);
+  --buttonBorderActive: var(--buttonBorder);
+  --buttonFocusBorder: 1px solid var(--themeColor);
+
+  --buttonPrimaryFontColor: #ffffff;
+  --buttonPrimaryBgColor: var(--themeColor);
+  --buttonPrimaryBorder: none;
+  --buttonPrimaryShadow: 0 8px 24px -10px rgba(123, 92, 255, .6);
+  --buttonPrimaryFontColorHover: #ffffff;
+  --buttonPrimaryBgColorHover: #8b6dff;
+  --buttonPrimaryBorderHover: var(--buttonPrimaryBorder);
+  --buttonPrimaryFontColorActive: #ffffff;
+  --buttonPrimaryBgColorActive: #6a4eea;
+  --buttonPrimaryBorderActive: var(--buttonPrimaryBorder);
+  --buttonPrimaryFocusBorder: none;
+  --buttonPrimaryFocusShadow: 0 0 0 3px rgba(123, 92, 255, .3);
+  --tableBorderColor: rgba(28, 25, 46, .12);
+
+  --sideBarColor: rgba(28, 25, 46, .72);
+  --sideBarIconColor: rgba(28, 25, 46, .55);
+  --sideBarTitleColor: rgba(28, 25, 46, .92);
+  --sideBarTextColor: rgba(28, 25, 46, .45);
+  --sideBarBgColor: rgba(255, 255, 255, .35);
+  --sideBarItemHoverBgColor: rgba(255, 255, 255, .35);
+  --itemBgColor: rgba(255, 255, 255, .5);
+
+  --floatFontColor: rgba(28, 25, 46, .88);
+  --floatBgColor: rgba(255, 255, 255, .75);
+  --floatHoverColor: rgba(123, 92, 255, .12);
+  --floatBorderColor: rgba(255, 255, 255, .6);
+  --floatShadow: 0 12px 40px -16px rgba(28, 25, 46, .35);
+  --maskColor: rgba(255, 255, 255, .35);
+  --editorAreaWidth: calc(90vw);
+}
+
+/* Aurora background — gradients that bleed through the frosted panels */
+body,
+html,
+#app,
+.editor-container {
+  background:
+    radial-gradient(60vw 60vh at 12% 10%, rgba(123, 92, 255, .35), transparent 60%),
+    radial-gradient(50vw 50vh at 90% 20%, rgba(255, 121, 198, .28), transparent 60%),
+    radial-gradient(50vw 50vh at 70% 95%, rgba(56, 189, 248, .28), transparent 60%),
+    linear-gradient(135deg, #fdf3ff 0%, #e8f1ff 50%, #f5edff 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/* Frost the editor surface */
+.ag-editor-container,
+.editor-component,
+.editor-tabs,
+.title-bar-editor-bg {
+  background: rgba(255, 255, 255, .35) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: none !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+/* Frost the sidebar */
+.side-bar {
+  background: rgba(255, 255, 255, .25) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  backdrop-filter: blur(32px) saturate(180%);
+  border-right: 1px solid rgba(255, 255, 255, .35) !important;
+}
+
+/* Floating panels (menus, popovers, autocomplete) */
+.ag-front-menu .submenu,
+.ag-float-wrapper {
+  background: rgba(255, 255, 255, .7) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, .6) !important;
+  box-shadow: var(--floatShadow) !important;
+  border-radius: 12px !important;
+}
+
+/* Tabs: glassy */
+.editor-tabs:after,
+.editor-tabs ul.tabs-container:after {
+  border: none !important;
+}
+.tabs-container > li {
+  background: transparent !important;
+}
+.tabs-container > li.active {
+  background: rgba(255, 255, 255, .55) !important;
+  border-radius: 8px 8px 0 0;
+}
+.tabs-container > li.active:after {
+  top: 0 !important;
+  bottom: auto !important;
+  background: var(--themeColor) !important;
+  height: 2px !important;
+  border-radius: 0 0 2px 2px;
+}
+
+/* Code blocks: subtle frost */
+:not(pre) > code[class*="language-"],
+pre:not(.CodeMirror-line),
+pre[class*="language-"],
+pre.ag-paragraph {
+  background: rgba(255, 255, 255, .45) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .55) !important;
+  border-radius: 10px;
+}
+
+/* Inline code */
+code {
+  background: rgba(255, 255, 255, .55) !important;
+  border: 1px solid rgba(255, 255, 255, .5) !important;
+  border-radius: 4px;
+  padding: 1px 6px !important;
+}
+
+/* Blockquote: glass + color stripe */
+blockquote.ag-paragraph {
+  background: rgba(255, 255, 255, .35) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-left: 3px solid var(--themeColor) !important;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Horizontal rule: soft gradient */
+p:not(.ag-active)[data-role="hr"]::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 1px;
+  border: none;
+  background: linear-gradient(90deg, transparent, rgba(123, 92, 255, .35), transparent) !important;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/* Scrollbar: subtle */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 25, 46, .15);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 25, 46, .25);
+}

@@ -30,8 +30,9 @@ export const configSettingMenu = (keybindings) => {
  * @param {Keybindings} keybindings The keybindings instance.
  * @param {Preference} preferences The preference instance.
  * @param {string[]} recentlyUsedFiles The recently used files.
+ * @param {Array<{id:string,name:string}>} userThemes The user-defined themes loaded from the userData/themes folder.
  */
-export default function (keybindings, preferences, recentlyUsedFiles) {
+export default function (keybindings, preferences, recentlyUsedFiles, userThemes = []) {
   return [
     ...(process.platform === 'darwin' ? [marktext(keybindings)] : []),
     file(keybindings, preferences, recentlyUsedFiles),
@@ -39,7 +40,7 @@ export default function (keybindings, preferences, recentlyUsedFiles) {
     paragraph(keybindings),
     format(keybindings),
     window(keybindings),
-    theme(preferences),
+    theme(preferences, userThemes),
     view(keybindings),
     help()
   ]

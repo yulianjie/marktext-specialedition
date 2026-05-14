@@ -429,6 +429,32 @@ class App {
       this._createEditorWindow()
     })
 
+    ipcMain.on('mt::ask-for-user-themes', e => {
+      const { userThemes } = this._accessor
+      const themes = userThemes ? userThemes.list({ refresh: true }) : []
+      e.sender.send('mt::user-themes', themes)
+    })
+
+    ipcMain.on('mt::open-user-themes-folder', () => {
+      const { userThemes } = this._accessor
+      if (userThemes) userThemes.openDir()
+    })
+
+    ipcMain.on('mt::reload-user-themes', () => {
+      const { userThemes, menu } = this._accessor
+      if (!userThemes) return
+      userThemes.invalidate()
+      const themes = userThemes.list({ refresh: true })
+      // Rebuild menus so newly added themes appear immediately.
+      if (menu && typeof menu.updateAppMenu === 'function') {
+        menu.updateAppMenu()
+      }
+      // Broadcast to every open window so both editor + settings caches refresh.
+      for (const win of BrowserWindow.getAllWindows()) {
+        win.webContents.send('mt::user-themes', themes)
+      }
+    })
+
     ipcMain.on('screen-capture', async win => {
       if (isOsx) {
         // Use macOs `screencapture` command line when in macOs system.

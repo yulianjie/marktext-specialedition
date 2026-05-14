@@ -9,6 +9,21 @@
         <div v-html="t.html"></div>
       </div>
     </section>
+
+    <template v-if="userThemes.length">
+      <h4 style="margin-top: 24px;">Custom Themes</h4>
+      <section class="offcial-themes user-themes">
+        <div v-for="t of userThemes" :key="t.id" class="theme user-theme"
+          :class="['type-' + t.type, { 'active': t.id === theme }]"
+          @click="onSelectChange('theme', t.id)"
+          :title="t.id"
+        >
+          <h3>{{ t.name }}</h3>
+          <p>来自主题文件夹</p>
+        </div>
+      </section>
+    </template>
+
     <separator></separator>
     <cur-select
       description="Automatically adjust application theme according to system settings"
@@ -16,16 +31,15 @@
       :options="autoSwitchThemeOptions"
       :onChange="value => onSelectChange('autoSwitchTheme', value)"
     ></cur-select>
-    <separator v-show="false"></separator>
-    <section v-show="false" class="import-themes ag-underdevelop">
+    <separator></separator>
+    <section class="import-themes">
       <div>
-        <span>Open the themes folder</span>
-        <el-button size="small">Open Folder</el-button>
+        <span>打开自定义主题文件夹（将 .css 文件放入此文件夹）</span>
+        <el-button size="small" @click="onOpenFolder">打开文件夹</el-button>
       </div>
-
       <div>
-        <span>Import custom themes</span>
-        <el-button size="small">Import Theme</el-button>
+        <span>重新扫描主题文件夹（无需重启即可加载新主题）</span>
+        <el-button size="small" @click="onReload">重新加载</el-button>
       </div>
     </section>
   </div>
@@ -33,6 +47,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { ipcRenderer } from 'electron'
 import themeMd from './theme.md'
 import { autoSwitchThemeOptions, themes } from './config'
 import markdownToHtml from '@/util/markdownToHtml'
@@ -47,7 +62,8 @@ export default {
   data () {
     this.autoSwitchThemeOptions = autoSwitchThemeOptions
     return {
-      themes: []
+      themes: [],
+      userThemes: []
     }
   },
   computed: {
@@ -66,13 +82,29 @@ export default {
           html
         })
       }
-
       this.themes = newThemes
     })
+
+    this._onUserThemes = (_, list) => {
+      this.userThemes = Array.isArray(list) ? list : []
+    }
+    ipcRenderer.on('mt::user-themes', this._onUserThemes)
+    ipcRenderer.send('mt::ask-for-user-themes')
+  },
+  beforeDestroy () {
+    if (this._onUserThemes) {
+      ipcRenderer.removeListener('mt::user-themes', this._onUserThemes)
+    }
   },
   methods: {
     onSelectChange (type, value) {
       this.$store.dispatch('SET_SINGLE_PREFERENCE', { type, value })
+    },
+    onOpenFolder () {
+      ipcRenderer.send('mt::open-user-themes-folder')
+    },
+    onReload () {
+      ipcRenderer.send('mt::reload-user-themes')
     }
   }
 }
@@ -137,9 +169,54 @@ export default {
           color: rgb(12, 139, 186);
         }
       }
+      &.minimalist {
+        color: #1f1f1f;
+        background: #fdfcfa;
+        font-family: "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+        & a {
+          color: #1f1f1f;
+        }
+      }
+      &.glass {
+        color: rgba(28, 25, 46, .88);
+        background:
+          radial-gradient(80% 80% at 20% 0%, rgba(123, 92, 255, .35), transparent 60%),
+          radial-gradient(80% 80% at 90% 100%, rgba(56, 189, 248, .35), transparent 60%),
+          linear-gradient(135deg, #fdf3ff, #e8f1ff);
+        & a {
+          color: #7b5cff;
+        }
+      }
+      &.macos {
+        color: #1d1d1f;
+        background: #ffffff;
+        box-shadow: 0 8px 24px -10px rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .06);
+        & a {
+          color: #007aff;
+        }
+      }
     }
     & .theme.active {
-      box-shadow: var(--floatShadow);
+      box-shadow: 0 0 0 2px var(--themeColor), 0 9px 28px -9px rgba(0, 0, 0, .4);
+    }
+    & .user-theme {
+      color: rgba(0, 0, 0, .7);
+      background: #fafafa;
+      padding: 18px 20px;
+      &.type-dark {
+        color: rgba(255, 255, 255, .85);
+        background: #282828;
+      }
+      & h3 {
+        margin: 0 0 6px 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      & p {
+        margin: 0;
+        font-size: 12px;
+        opacity: .55;
+      }
     }
     & h3 {
       margin: 0;
@@ -165,14 +242,17 @@ export default {
   .import-themes {
     padding: 10px 0;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    gap: 12px;
     color: var(--editorColor);
     & > div {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       & > span {
-        display: inline-block;
-        margin-bottom: 20px;
+        font-size: 13px;
+        opacity: .85;
       }
     }
   }

@@ -1,58 +1,48 @@
 import * as actions from '../actions/theme'
 
-export default function (userPreference) {
+const BUILT_IN = [
+  { id: 'light', label: 'Cadmium Light' },
+  { id: 'dark', label: 'Dark' },
+  { id: 'graphite', label: 'Graphite Light' },
+  { id: 'material-dark', label: 'Material Dark' },
+  { id: 'one-dark', label: 'One Dark' },
+  { id: 'ulysses', label: 'Ulysses Light' },
+  { id: 'minimalist', label: 'Minimalist' },
+  { id: 'glass', label: 'Frosted Glass' },
+  { id: 'macos', label: 'macOS' }
+]
+
+export default function (userPreference, userThemes = []) {
   const { theme } = userPreference.getAll()
+
+  const submenu = BUILT_IN.map(t => ({
+    label: t.label,
+    type: 'radio',
+    id: t.id,
+    checked: theme === t.id,
+    click () {
+      actions.selectTheme(t.id)
+    }
+  }))
+
+  if (userThemes.length > 0) {
+    submenu.push({ type: 'separator' })
+    for (const t of userThemes) {
+      submenu.push({
+        label: t.name || t.id,
+        type: 'radio',
+        id: t.id,
+        checked: theme === t.id,
+        click () {
+          actions.selectTheme(t.id)
+        }
+      })
+    }
+  }
+
   return {
     label: '&Theme',
     id: 'themeMenu',
-    submenu: [{
-      label: 'Cadmium Light',
-      type: 'radio',
-      id: 'light',
-      checked: theme === 'light',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('light')
-      }
-    }, {
-      label: 'Dark',
-      type: 'radio',
-      id: 'dark',
-      checked: theme === 'dark',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('dark')
-      }
-    }, {
-      label: 'Graphite Light',
-      type: 'radio',
-      id: 'graphite',
-      checked: theme === 'graphite',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('graphite')
-      }
-    }, {
-      label: 'Material Dark',
-      type: 'radio',
-      id: 'material-dark',
-      checked: theme === 'material-dark',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('material-dark')
-      }
-    }, {
-      label: 'One Dark',
-      type: 'radio',
-      id: 'one-dark',
-      checked: theme === 'one-dark',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('one-dark')
-      }
-    }, {
-      label: 'Ulysses Light',
-      type: 'radio',
-      id: 'ulysses',
-      checked: theme === 'ulysses',
-      click (menuItem, browserWindow) {
-        actions.selectTheme('ulysses')
-      }
-    }]
+    submenu
   }
 }

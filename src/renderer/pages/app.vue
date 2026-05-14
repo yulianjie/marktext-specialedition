@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { addStyles, addThemeStyle } from '@/util/theme'
+import { addStyles, addThemeStyle, registerUserThemes } from '@/util/theme'
 import Recent from '@/components/recent'
 import EditorWithTabs from '@/components/editorWithTabs'
 import TitleBar from '@/components/titleBar'
@@ -116,6 +116,18 @@ export default {
     if (global.marktext.initialState) {
       commit('SET_USER_PREFERENCE', global.marktext.initialState)
     }
+
+    // Load user-defined themes from main process so addThemeStyle() can resolve them.
+    ipcRenderer.on('mt::user-themes', (_, themes) => {
+      registerUserThemes(themes)
+      // Re-apply the current theme in case it is a user theme that wasn't available before.
+      const current = this.theme
+      if (current && !['light', 'dark', 'graphite', 'material-dark', 'one-dark', 'ulysses',
+        'minimalist', 'glass', 'macos'].includes(current)) {
+        addThemeStyle(current)
+      }
+    })
+    ipcRenderer.send('mt::ask-for-user-themes')
 
     // store/index.js
     dispatch('LINTEN_WIN_STATUS')

@@ -24,10 +24,11 @@ class AppMenu {
    * @param {Keybindings} keybindings The keybindings instances.
    * @param {string} userDataPath The user data path.
    */
-  constructor (preferences, keybindings, userDataPath) {
+  constructor (preferences, keybindings, userDataPath, userThemes) {
     this._preferences = preferences
     this._keybindings = keybindings
     this._userDataPath = userDataPath
+    this._userThemes = userThemes
 
     this.RECENTS_PATH = path.join(userDataPath, RECENTLY_USED_DOCUMENTS_FILE_NAME)
     this.isOsxOrWindows = isOsx || isWindows
@@ -341,7 +342,8 @@ class AppMenu {
       recentUsedDocuments = this.getRecentlyUsedDocuments()
     }
 
-    const menuTemplate = configureMenu(this._keybindings, this._preferences, recentUsedDocuments)
+    const userThemeList = this._userThemes ? this._userThemes.list() : []
+    const menuTemplate = configureMenu(this._keybindings, this._preferences, recentUsedDocuments, userThemeList)
     const menu = Menu.buildFromTemplate(menuTemplate)
     return { menu, type: MenuType.EDITOR }
   }

@@ -1,22 +1,13 @@
 export const themes = [
-  {
-    name: 'light'
-  },
-  {
-    name: 'dark'
-  },
-  {
-    name: 'graphite'
-  },
-  {
-    name: 'material-dark'
-  },
-  {
-    name: 'ulysses'
-  },
-  {
-    name: 'one-dark'
-  }
+  { name: 'light' },
+  { name: 'dark' },
+  { name: 'graphite' },
+  { name: 'material-dark' },
+  { name: 'ulysses' },
+  { name: 'one-dark' },
+  { name: 'minimalist' },
+  { name: 'glass' },
+  { name: 'macos' }
 ]
 
 export const autoSwitchThemeOptions = [{

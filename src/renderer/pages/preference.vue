@@ -17,9 +17,10 @@ import { mapState } from 'vuex'
 import TitleBar from '@/prefComponents/common/titlebar'
 import SideBar from '@/prefComponents/sideBar'
 import { loadingPageMixins } from '@/mixins'
-import { addThemeStyle } from '@/util/theme'
+import { addThemeStyle, registerUserThemes } from '@/util/theme'
 import { DEFAULT_STYLE } from '@/config'
 import { isOsx } from '@/util'
+import { ipcRenderer } from 'electron'
 
 export default {
   data () {
@@ -48,6 +49,17 @@ export default {
     }
   },
   created () {
+    ipcRenderer.on('mt::user-themes', (_, themes) => {
+      registerUserThemes(themes)
+      // Re-apply if the current theme is a user theme — only resolvable after the cache is filled.
+      const current = this.theme
+      if (current && !['light', 'dark', 'graphite', 'material-dark', 'one-dark', 'ulysses',
+        'minimalist', 'glass', 'macos'].includes(current)) {
+        addThemeStyle(current)
+      }
+    })
+    ipcRenderer.send('mt::ask-for-user-themes')
+
     this.$nextTick(() => {
       const state = global.marktext.initialState || DEFAULT_STYLE
       addThemeStyle(state.theme)

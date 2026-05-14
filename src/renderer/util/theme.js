@@ -1,7 +1,21 @@
 import { THEME_STYLE_ID, COMMON_STYLE_ID, DEFAULT_CODE_FONT_FAMILY, oneDarkThemes, railscastsThemes } from '../config'
-import { dark, graphite, materialDark, oneDark, ulysses } from './themeColor'
+import { dark, graphite, materialDark, oneDark, ulysses, minimalist, glass, macos } from './themeColor'
 import { isLinux } from './index'
 import elementStyle from 'element-ui/lib/theme-chalk/index.css'
+
+// In-memory cache of user themes pushed from the main process.
+// Keyed by theme id → { id, name, type ('light'|'dark'), css }
+const userThemeCache = new Map()
+
+export const registerUserThemes = (themes = []) => {
+  userThemeCache.clear()
+  for (const t of themes) {
+    if (t && t.id) userThemeCache.set(t.id, t)
+  }
+}
+
+export const getUserTheme = (id) => userThemeCache.get(id)
+export const listUserThemes = () => Array.from(userThemeCache.values())
 
 const ORIGINAL_THEME = '#409EFF'
 const patchTheme = css => {
@@ -49,7 +63,7 @@ const getThemeCluster = themeColor => {
 export const addThemeStyle = theme => {
   const isCmRailscasts = railscastsThemes.includes(theme)
   const isCmOneDark = oneDarkThemes.includes(theme)
-  const isDarkTheme = isCmOneDark || isCmRailscasts
+  let isDarkTheme = isCmOneDark || isCmRailscasts
   let themeStyleEle = document.querySelector(`#${THEME_STYLE_ID}`)
   if (!themeStyleEle) {
     themeStyleEle = document.createElement('style')
@@ -76,9 +90,28 @@ export const addThemeStyle = theme => {
     case 'one-dark':
       themeStyleEle.innerHTML = patchTheme(oneDark())
       break
-    default:
-      console.log('unknown theme')
+    case 'minimalist':
+      themeStyleEle.innerHTML = patchTheme(minimalist())
       break
+    case 'glass':
+      themeStyleEle.innerHTML = patchTheme(glass())
+      break
+    case 'macos':
+      themeStyleEle.innerHTML = patchTheme(macos())
+      break
+    default: {
+      const userTheme = userThemeCache.get(theme)
+      if (userTheme && typeof userTheme.css === 'string') {
+        themeStyleEle.innerHTML = patchTheme(userTheme.css)
+        if (userTheme.type === 'dark') {
+          isDarkTheme = true
+        }
+      } else {
+        console.log(`unknown theme: ${theme}`)
+        themeStyleEle.innerHTML = ''
+      }
+      break
+    }
   }
 
   // workaround: use dark icons

@@ -8,6 +8,11 @@ directories:
   output: "build"
 # Workaround: Don't download prebuilt libraries (GH#2953).
 buildDependenciesFromSource: true
+# Skip native rebuild during packaging — relies on the binaries already present
+# in node_modules (the same ones `yarn dev` uses). Avoids requiring VS Spectre-
+# mitigated libs on the build host. If you upgrade Electron, re-run
+# `electron-builder install-app-deps` manually before building.
+npmRebuild: false
 files:
 - "dist/electron/**/*"
 # Don't bundle these files

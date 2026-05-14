@@ -1,0 +1,250 @@
+/*
+ * macOS — Sonoma-inspired light theme.
+ * SF Pro typography, system blue accent, soft shadows, vibrancy-style sidebar.
+ */
+:root {
+  --themeColor: #007aff;
+  --themeColor90: rgba(0, 122, 255, .9);
+  --themeColor80: rgba(0, 122, 255, .8);
+  --themeColor70: rgba(0, 122, 255, .7);
+  --themeColor60: rgba(0, 122, 255, .6);
+  --themeColor50: rgba(0, 122, 255, .5);
+  --themeColor40: rgba(0, 122, 255, .4);
+  --themeColor30: rgba(0, 122, 255, .3);
+  --themeColor20: rgba(0, 122, 255, .2);
+  --themeColor10: rgba(0, 122, 255, .1);
+
+  --highlightColor: rgba(0, 122, 255, .25);
+  --selectionColor: rgba(0, 122, 255, .18);
+  --editorColor: #1d1d1f;
+  --editorColor80: rgba(29, 29, 31, .8);
+  --editorColor60: rgba(29, 29, 31, .6);
+  --editorColor50: rgba(29, 29, 31, .5);
+  --editorColor40: rgba(29, 29, 31, .4);
+  --editorColor30: rgba(29, 29, 31, .3);
+  --editorColor10: rgba(29, 29, 31, .1);
+  --editorColor04: rgba(29, 29, 31, .04);
+  --editorBgColor: #ffffff;
+  --deleteColor: #ff3b30;
+  --iconColor: rgba(29, 29, 31, .55);
+  --codeBgColor: #f1f1f3;
+  --codeBlockBgColor: #f7f7f9;
+  --footnoteBgColor: rgba(29, 29, 31, .04);
+  --inputBgColor: #ffffff;
+  --focusColor: var(--themeColor);
+
+  --buttonFontColor: #1d1d1f;
+  --buttonBgColor: #ffffff;
+  --buttonBorder: 1px solid rgba(0, 0, 0, .1);
+  --buttonShadow: 0 1px 2px rgba(0, 0, 0, .06);
+  --buttonFontColorHover: #1d1d1f;
+  --buttonBgColorHover: #f5f5f7;
+  --buttonBorderHover: 1px solid rgba(0, 0, 0, .12);
+  --buttonFontColorActive: #1d1d1f;
+  --buttonBgColorActive: #ececef;
+  --buttonBorderActive: var(--buttonBorder);
+  --buttonFocusBorder: 1px solid var(--themeColor);
+
+  --buttonPrimaryFontColor: #ffffff;
+  --buttonPrimaryBgColor: var(--themeColor);
+  --buttonPrimaryBorder: none;
+  --buttonPrimaryShadow: 0 1px 2px rgba(0, 122, 255, .25);
+  --buttonPrimaryFontColorHover: #ffffff;
+  --buttonPrimaryBgColorHover: #1a86ff;
+  --buttonPrimaryBorderHover: var(--buttonPrimaryBorder);
+  --buttonPrimaryFontColorActive: #ffffff;
+  --buttonPrimaryBgColorActive: #0064d2;
+  --buttonPrimaryBorderActive: var(--buttonPrimaryBorder);
+  --buttonPrimaryFocusBorder: none;
+  --buttonPrimaryFocusShadow: 0 0 0 3px rgba(0, 122, 255, .25);
+  --tableBorderColor: rgba(0, 0, 0, .1);
+
+  --sideBarColor: rgba(29, 29, 31, .82);
+  --sideBarIconColor: rgba(29, 29, 31, .58);
+  --sideBarTitleColor: rgba(29, 29, 31, .92);
+  --sideBarTextColor: rgba(29, 29, 31, .45);
+  --sideBarBgColor: #f5f5f7;
+  --sideBarItemHoverBgColor: rgba(0, 0, 0, .04);
+  --itemBgColor: rgba(0, 122, 255, .12);
+
+  --floatFontColor: #1d1d1f;
+  --floatBgColor: rgba(255, 255, 255, .82);
+  --floatHoverColor: rgba(0, 0, 0, .05);
+  --floatBorderColor: rgba(0, 0, 0, .08);
+  --floatShadow: 0 14px 36px -10px rgba(0, 0, 0, .22), 0 2px 6px rgba(0, 0, 0, .06);
+  --maskColor: rgba(255, 255, 255, .65);
+  --editorAreaWidth: calc(90vw);
+}
+
+/* System fonts everywhere */
+body,
+html,
+.editor-container,
+.ag-editor-container,
+.editor-component {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1.ag-paragraph,
+h2.ag-paragraph,
+h3.ag-paragraph,
+h4.ag-paragraph,
+h5.ag-paragraph,
+h6.ag-paragraph {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+}
+
+/* Sidebar: Finder/Notes vibrancy */
+.side-bar {
+  background: var(--sideBarBgColor) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  backdrop-filter: saturate(180%) blur(24px);
+  border-right: 1px solid rgba(0, 0, 0, .07) !important;
+}
+
+/* Active item in sidebar — macOS pill */
+.side-bar .file-item.active,
+.side-bar .ag-active,
+.side-bar .selected {
+  background: var(--itemBgColor) !important;
+  color: var(--themeColor) !important;
+  border-radius: 6px !important;
+}
+
+/* Tabs: Safari-style segmented */
+.editor-tabs {
+  background: #ececef !important;
+  box-shadow: none !important;
+  padding: 0 4px;
+}
+.editor-tabs:after,
+.editor-tabs ul.tabs-container:after {
+  border: none !important;
+}
+.title-bar-editor-bg.tabs-visible {
+  background: #ececef !important;
+}
+.tabs-container > li {
+  background: transparent !important;
+  margin: 4px 2px !important;
+  border-radius: 6px !important;
+  transition: background .15s ease;
+}
+.tabs-container > li:hover {
+  background: rgba(0, 0, 0, .04) !important;
+}
+.tabs-container > li.active {
+  background: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 0 0 1px rgba(0, 0, 0, .04) !important;
+}
+.tabs-container > li.active:after {
+  display: none !important;
+}
+
+/* Title bar: subtle */
+.title-bar {
+  border-bottom: 1px solid rgba(0, 0, 0, .06) !important;
+}
+
+/* Floats: rounded with soft shadow */
+.ag-front-menu .submenu,
+.ag-float-wrapper {
+  background: var(--floatBgColor) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--floatBorderColor) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--floatShadow) !important;
+}
+
+/* Code blocks: bordered card */
+:not(pre) > code[class*="language-"],
+pre:not(.CodeMirror-line),
+pre[class*="language-"],
+pre.ag-paragraph {
+  background: var(--codeBlockBgColor) !important;
+  border: 1px solid rgba(0, 0, 0, .06) !important;
+  border-radius: 8px;
+}
+
+/* Inline code */
+code {
+  background: var(--codeBgColor) !important;
+  border: 1px solid rgba(0, 0, 0, .05) !important;
+  border-radius: 4px;
+  padding: 1px 5px !important;
+  font-size: 0.92em;
+}
+
+/* Blockquote */
+blockquote.ag-paragraph {
+  background: #f7f7f9 !important;
+  border-left: 3px solid var(--themeColor) !important;
+  border-radius: 0 6px 6px 0;
+  color: rgba(29, 29, 31, .8) !important;
+}
+
+/* HR */
+p:not(.ag-active)[data-role="hr"]::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 1px;
+  border: none;
+  background: rgba(0, 0, 0, .1) !important;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/* Tables */
+table.ag-paragraph {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: 1px solid var(--tableBorderColor) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+table.ag-paragraph th {
+  background: #f5f5f7 !important;
+  border-bottom: 1px solid var(--tableBorderColor) !important;
+}
+table.ag-paragraph td {
+  border-bottom: 1px solid var(--tableBorderColor) !important;
+}
+table.ag-paragraph tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Task list checkboxes: macOS rounded */
+li.ag-task-list-item > input[type=checkbox]::before {
+  border: 1.5px solid rgba(0, 0, 0, .35);
+  border-radius: 4px;
+}
+li.ag-task-list-item > input.ag-checkbox-checked::before {
+  background: var(--themeColor) !important;
+  border: 1.5px solid var(--themeColor) !important;
+}
+
+/* Scrollbar: thin macOS */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, .35);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}

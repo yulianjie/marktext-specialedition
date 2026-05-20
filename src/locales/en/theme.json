@@ -1,0 +1,14 @@
+{
+  "title": "Theme",
+  "customThemes": "Custom Themes",
+  "fromFolder": "From theme folder",
+  "autoSwitch": {
+    "desc": "Automatically adjust application theme according to system settings",
+    "atStartup": "Adjust theme at startup",
+    "never": "Never"
+  },
+  "openFolderHelp": "Open the custom theme folder (drop .css files into it)",
+  "openFolderBtn": "Open folder",
+  "reloadHelp": "Re-scan the theme folder (no restart needed to load new themes)",
+  "reloadBtn": "Reload"
+}

@@ -17,31 +17,31 @@ export const orderListDelimiterOptions = [{
   value: ')'
 }]
 
-export const preferHeadingStyleOptions = [{
-  label: 'ATX heading',
+export const buildPreferHeadingStyleOptions = t => [{
+  label: t('markdown.preferHeadingStyle.atx'),
   value: 'atx'
 }, {
-  label: 'Setext heading',
+  label: t('markdown.preferHeadingStyle.setext'),
   value: 'setext'
 }]
 
-export const listIndentationOptions = [{
-  label: 'DocFX style',
+export const buildListIndentationOptions = t => [{
+  label: t('markdown.listIndentation.docFx'),
   value: 'dfm'
 }, {
-  label: 'True tab character',
+  label: t('markdown.listIndentation.tab'),
   value: 'tab'
 }, {
-  label: 'Single space character',
+  label: t('markdown.listIndentation.one'),
   value: 1
 }, {
-  label: 'Two space characters',
+  label: t('markdown.listIndentation.two'),
   value: 2
 }, {
-  label: 'Three space characters',
+  label: t('markdown.listIndentation.three'),
   value: 3
 }, {
-  label: 'Four space characters',
+  label: t('markdown.listIndentation.four'),
   value: 4
 }]
 
@@ -59,10 +59,10 @@ export const frontmatterTypeOptions = [{
   value: '{'
 }]
 
-export const sequenceThemeOptions = [{
-  label: 'Hand drawn',
+export const buildSequenceThemeOptions = t => [{
+  label: t('markdown.sequenceTheme.hand'),
   value: 'hand'
 }, {
-  label: 'Simple',
+  label: t('markdown.sequenceTheme.simple'),
   value: 'simple'
 }]

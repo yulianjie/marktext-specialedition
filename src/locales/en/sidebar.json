@@ -1,0 +1,13 @@
+{
+  "title": "Preferences",
+  "searchPlaceholder": "Search preferences",
+  "categories": {
+    "general": "General",
+    "editor": "Editor",
+    "markdown": "Markdown",
+    "spelling": "Spelling",
+    "theme": "Theme",
+    "image": "Image",
+    "keybindings": "Key Bindings"
+  }
+}

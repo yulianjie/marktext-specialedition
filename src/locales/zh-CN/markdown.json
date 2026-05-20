@@ -1,0 +1,40 @@
+{
+  "title": "Markdown",
+  "sections": {
+    "lists": "列表：",
+    "extensions": "Markdown 扩展：",
+    "compatibility": "兼容性：",
+    "diagrams": "图表：",
+    "misc": "杂项："
+  },
+  "preferLooseListItem": "默认使用松散列表项",
+  "bulletListMarker": "无序列表首选标记",
+  "orderListDelimiter": "有序列表首选分隔符",
+  "listIndentation": {
+    "desc": "首选列表缩进",
+    "docFx": "DocFX 风格",
+    "tab": "真正的 Tab 字符",
+    "one": "1 个空格",
+    "two": "2 个空格",
+    "three": "3 个空格",
+    "four": "4 个空格"
+  },
+  "frontmatterType": "Front Matter 格式",
+  "superSubScript": "启用 Pandoc 风格上下标",
+  "footnote": {
+    "desc": "启用 Pandoc 风格脚注",
+    "notes": "需要重启生效。"
+  },
+  "isHtmlEnabled": "启用 HTML 渲染",
+  "isGitlabCompatibilityEnabled": "启用 GitLab 兼容模式",
+  "sequenceTheme": {
+    "desc": "时序图主题",
+    "hand": "手绘",
+    "simple": "简约"
+  },
+  "preferHeadingStyle": {
+    "desc": "首选标题风格",
+    "atx": "ATX 标题（# 前缀）",
+    "setext": "Setext 标题（下划线）"
+  }
+}

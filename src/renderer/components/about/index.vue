@@ -22,7 +22,7 @@
           <div class="text">{{ copyrightContributors }}</div>
         </el-col>
         <el-col :span="24">
-          <h3 class="title">中文特别版</h3>
+          <h3 class="title">{{ $t('about.specialEdition') }}</h3>
         </el-col>
         <el-col :span="24">
           <div class="text">{{ copyright_new }}</div>

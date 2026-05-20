@@ -1,0 +1,21 @@
+{
+  "title": "拼写",
+  "enable": "启用拼写检查",
+  "hideMarks": "隐藏拼写错误标记",
+  "autoDetect": "自动检测文档语言",
+  "defaultLang": "拼写检查默认语言",
+  "osxNote": "输入时会自动检测当前语言。可在系统偏好设置的\"语言与地区\"中添加更多语言。",
+  "customDict": {
+    "section": "自定义词典：",
+    "desc": "编辑自定义词典中的词条。",
+    "empty": "没有词条",
+    "word": "单词",
+    "options": "操作",
+    "delete": "删除"
+  },
+  "notify": {
+    "switchFailedTitle": "切换语言失败",
+    "removeFailedTitle": "删除自定义词条失败",
+    "saveError": "保存时发生意外错误。"
+  }
+}

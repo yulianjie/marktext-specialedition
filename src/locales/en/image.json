@@ -1,0 +1,10 @@
+{
+  "title": "Image",
+  "defaultActionDesc": "Default action after an image is inserted from local folder or clipboard",
+  "clipboardNote": "Clipboard handling is only fully supported on macOS and Windows.",
+  "actions": {
+    "upload": "Upload image to cloud using selected uploader (must be configured below)",
+    "copy": "Copy image to designated relative assets or global local folder",
+    "keep": "Keep original location"
+  }
+}

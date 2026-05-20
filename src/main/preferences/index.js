@@ -2,10 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import EventEmitter from 'events'
 import Store from 'electron-store'
-import { BrowserWindow, ipcMain, nativeTheme } from 'electron'
+import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import log from 'electron-log'
 import { isWindows } from '../config'
 import { hasSameKeys } from '../utils'
+import { normalizeLocale } from 'common/i18n'
 import schema from './schema'
 
 const PREFERENCES_FILE_NAME = 'preferences'
@@ -52,6 +53,7 @@ class Preference extends EventEmitter {
 
     // I don't know why `this.store.size` is 3 when first load, so I just check file existed.
     if (!this.hasPreferencesFile) {
+      defaultSettings.language = normalizeLocale(app.getLocale())
       this.store.set(defaultSettings)
     } else {
       // Because `this.getAll()` will return a plainObject, so we can not use `hasOwnProperty` method

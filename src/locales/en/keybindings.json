@@ -1,0 +1,27 @@
+{
+  "title": "Key Bindings",
+  "instructions": "Customize MarkText shortcuts and click on the save button below to apply all changes (requires a restart). All available and default key binding can be found",
+  "online": "online",
+  "columns": {
+    "description": "Description",
+    "key": "Key Combination",
+    "options": "Options"
+  },
+  "row": {
+    "edit": "Edit",
+    "reset": "Reset",
+    "unbind": "Unbind"
+  },
+  "buttons": {
+    "save": "Save",
+    "restoreDefaults": "Restore default key bindings",
+    "debug": "Dump keyboard information"
+  },
+  "debugHeading": "Debug options:",
+  "notify": {
+    "saveFailedTitle": "Failed to save",
+    "saveError": "An unexpected error occurred while saving.",
+    "inUseTitle": "Shortcut already in use",
+    "inUseMessage": "The shortcut \"{accelerator}\" is already in use. Please unset the shortcut and try again."
+  }
+}

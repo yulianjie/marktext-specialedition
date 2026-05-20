@@ -1,0 +1,40 @@
+{
+  "title": "Markdown",
+  "sections": {
+    "lists": "Lists:",
+    "extensions": "Markdown extensions:",
+    "compatibility": "Compatibility:",
+    "diagrams": "Diagrams:",
+    "misc": "Misc:"
+  },
+  "preferLooseListItem": "Prefer loose list items",
+  "bulletListMarker": "Preferred marker for bullet lists",
+  "orderListDelimiter": "Preferred marker for ordered lists",
+  "listIndentation": {
+    "desc": "Preferred list indentation",
+    "docFx": "DocFX style",
+    "tab": "True tab character",
+    "one": "Single space character",
+    "two": "Two space characters",
+    "three": "Three space characters",
+    "four": "Four space characters"
+  },
+  "frontmatterType": "Front matter format",
+  "superSubScript": "Enable Pandoc-style superscript and subscript",
+  "footnote": {
+    "desc": "Enable Pandoc-style footnotes",
+    "notes": "Requires restart."
+  },
+  "isHtmlEnabled": "Enable HTML rendering",
+  "isGitlabCompatibilityEnabled": "Enable GitLab compatibility mode",
+  "sequenceTheme": {
+    "desc": "Sequence diagram theme",
+    "hand": "Hand drawn",
+    "simple": "Simple"
+  },
+  "preferHeadingStyle": {
+    "desc": "Preferred heading style",
+    "atx": "ATX heading",
+    "setext": "Setext heading"
+  }
+}

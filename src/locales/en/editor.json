@@ -1,0 +1,50 @@
+{
+  "title": "Editor",
+  "sections": {
+    "textEditor": "Text editor settings:",
+    "codeBlock": "Code block settings:",
+    "writing": "Writing behavior:",
+    "fileRep": "File representation:",
+    "misc": "Misc:"
+  },
+  "fontSize": "Font size",
+  "lineHeight": "Line height",
+  "fontFamily": "Font family",
+  "maxWidth": {
+    "desc": "Maximum width of text editor",
+    "notes": "Leave empty for theme default, otherwise use number with unit suffix, which is one of 'ch' for characters, 'px' for pixels, or '%' for percentage."
+  },
+  "codeFontSize": "Font size",
+  "codeFontFamily": "Font family",
+  "showLineNumbers": "Show line numbers",
+  "trimCodeEmptyLines": "Remove leading and trailing empty lines",
+  "autoPairBracket": "Automatically close brackets when writing",
+  "autoPairMarkdown": "Automatically complete markdown syntax",
+  "autoPairQuote": "Automatically close quotation marks",
+  "tabSize": {
+    "desc": "Preferred tab width"
+  },
+  "endOfLine": {
+    "desc": "Line separator type",
+    "default": "Default",
+    "crlf": "Carriage return and line feed (CRLF)",
+    "lf": "Line feed (LF)"
+  },
+  "defaultEncoding": "Default encoding",
+  "autoGuessEncoding": "Automatically detect file encoding",
+  "trimTrailingNewline": {
+    "desc": "Handling of trailing newline characters",
+    "trimAll": "Trim all trailing",
+    "ensureOne": "Ensure exactly one trailing",
+    "preserve": "Preserve style of original document",
+    "nothing": "Do nothing"
+  },
+  "textDirection": {
+    "desc": "Text direction",
+    "ltr": "Left to Right",
+    "rtl": "Right to Left"
+  },
+  "hideQuickInsertHint": "Hide hint for selecting type of new paragraph",
+  "hideLinkPopup": "Hide popup when cursor is over link",
+  "autoCheck": "Whether to automatically check any related tasks"
+}

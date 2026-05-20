@@ -14,36 +14,36 @@ export const tabSizeOptions = [{
   value: 4
 }]
 
-export const endOfLineOptions = [{
-  label: 'Default',
+export const buildEndOfLineOptions = t => [{
+  label: t('editor.endOfLine.default'),
   value: 'default'
 }, {
-  label: 'Carriage return and line feed (CRLF)',
+  label: t('editor.endOfLine.crlf'),
   value: 'crlf'
 }, {
-  label: 'Line feed (LF)',
+  label: t('editor.endOfLine.lf'),
   value: 'lf'
 }]
 
-export const trimTrailingNewlineOptions = [{
-  label: 'Trim all trailing',
+export const buildTrimTrailingNewlineOptions = t => [{
+  label: t('editor.trimTrailingNewline.trimAll'),
   value: 0
 }, {
-  label: 'Ensure exactly one trailing',
+  label: t('editor.trimTrailingNewline.ensureOne'),
   value: 1
 }, {
-  label: 'Preserve style of original document',
+  label: t('editor.trimTrailingNewline.preserve'),
   value: 2
 }, {
-  label: 'Do nothing',
+  label: t('editor.trimTrailingNewline.nothing'),
   value: 3
 }]
 
-export const textDirectionOptions = [{
-  label: 'Left to Right',
+export const buildTextDirectionOptions = t => [{
+  label: t('editor.textDirection.ltr'),
   value: 'ltr'
 }, {
-  label: 'Right to Left',
+  label: t('editor.textDirection.rtl'),
   value: 'rtl'
 }]
 

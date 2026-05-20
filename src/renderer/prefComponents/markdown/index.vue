@@ -1,33 +1,33 @@
 <template>
   <div class="pref-markdown">
-    <h4>Markdown</h4>
+    <h4>{{ $t('markdown.title') }}</h4>
     <compound>
       <template #head>
-        <h6 class="title">Lists:</h6>
+        <h6 class="title">{{ $t('markdown.sections.lists') }}</h6>
       </template>
       <template #children>
         <bool
-          description="Prefer loose list items"
+          :description="$t('markdown.preferLooseListItem')"
           :bool="preferLooseListItem"
           :onChange="value => onSelectChange('preferLooseListItem', value)"
           more="https://spec.commonmark.org/0.29/#loose"
         ></bool>
         <cur-select
-          description="Preferred marker for bullet lists"
+          :description="$t('markdown.bulletListMarker')"
           :value="bulletListMarker"
           :options="bulletListMarkerOptions"
           :onChange="value => onSelectChange('bulletListMarker', value)"
           more="https://spec.commonmark.org/0.29/#bullet-list-marker"
         ></cur-select>
         <cur-select
-          description="Preferred marker for ordered lists"
+          :description="$t('markdown.orderListDelimiter')"
           :value="orderListDelimiter"
           :options="orderListDelimiterOptions"
           :onChange="value => onSelectChange('orderListDelimiter', value)"
           more="https://spec.commonmark.org/0.29/#ordered-list"
         ></cur-select>
         <cur-select
-          description="Preferred list indentation"
+          :description="$t('markdown.listIndentation.desc')"
           :value="listIndentation"
           :options="listIndentationOptions"
           :onChange="value => onSelectChange('listIndentation', value)"
@@ -37,24 +37,24 @@
 
     <compound>
       <template #head>
-        <h6 class="title">Markdown extensions:</h6>
+        <h6 class="title">{{ $t('markdown.sections.extensions') }}</h6>
       </template>
       <template #children>
         <cur-select
-          description="Front matter format"
+          :description="$t('markdown.frontmatterType')"
           :value="frontmatterType"
           :options="frontmatterTypeOptions"
           :onChange="value => onSelectChange('frontmatterType', value)"
         ></cur-select>
         <bool
-          description="Enable Pandoc-style superscript and subscript"
+          :description="$t('markdown.superSubScript')"
           :bool="superSubScript"
           :onChange="value => onSelectChange('superSubScript', value)"
           more="https://pandoc.org/MANUAL.html#superscripts-and-subscripts"
         ></bool>
         <bool
-          description="Enable Pandoc-style footnotes"
-          notes="Requires restart."
+          :description="$t('markdown.footnote.desc')"
+          :notes="$t('markdown.footnote.notes')"
           :bool="footnote"
           :onChange="value => onSelectChange('footnote', value)"
           more="https://pandoc.org/MANUAL.html#footnotes"
@@ -64,16 +64,16 @@
 
     <compound>
       <template #head>
-        <h6 class="title">Compatibility:</h6>
+        <h6 class="title">{{ $t('markdown.sections.compatibility') }}</h6>
       </template>
       <template #children>
         <bool
-          description="Enable HTML rendering"
+          :description="$t('markdown.isHtmlEnabled')"
           :bool="isHtmlEnabled"
           :onChange="value => onSelectChange('isHtmlEnabled', value)"
         ></bool>
         <bool
-          description="Enable GitLab compatibility mode"
+          :description="$t('markdown.isGitlabCompatibilityEnabled')"
           :bool="isGitlabCompatibilityEnabled"
           :onChange="value => onSelectChange('isGitlabCompatibilityEnabled', value)"
         ></bool>
@@ -82,11 +82,11 @@
 
     <compound>
       <template #head>
-        <h6 class="title">Diagrams:</h6>
+        <h6 class="title">{{ $t('markdown.sections.diagrams') }}</h6>
       </template>
       <template #children>
         <cur-select
-          description="Sequence diagram theme"
+          :description="$t('markdown.sequenceTheme.desc')"
           :value="sequenceTheme"
           :options="sequenceThemeOptions"
           :onChange="value => onSelectChange('sequenceTheme', value)"
@@ -97,11 +97,11 @@
 
     <compound>
       <template #head>
-        <h6 class="title">Misc:</h6>
+        <h6 class="title">{{ $t('markdown.sections.misc') }}</h6>
       </template>
       <template #children>
         <cur-select
-          description="Preferred heading style"
+          :description="$t('markdown.preferHeadingStyle.desc')"
           :value="preferHeadingStyle"
           :options="preferHeadingStyleOptions"
           :onChange="value => onSelectChange('preferHeadingStyle', value)"
@@ -121,10 +121,10 @@ import CurSelect from '../common/select'
 import {
   bulletListMarkerOptions,
   orderListDelimiterOptions,
-  preferHeadingStyleOptions,
-  listIndentationOptions,
+  buildPreferHeadingStyleOptions,
+  buildListIndentationOptions,
   frontmatterTypeOptions,
-  sequenceThemeOptions
+  buildSequenceThemeOptions
 } from './config'
 
 export default {
@@ -137,10 +137,7 @@ export default {
   data () {
     this.bulletListMarkerOptions = bulletListMarkerOptions
     this.orderListDelimiterOptions = orderListDelimiterOptions
-    this.preferHeadingStyleOptions = preferHeadingStyleOptions
-    this.listIndentationOptions = listIndentationOptions
     this.frontmatterTypeOptions = frontmatterTypeOptions
-    this.sequenceThemeOptions = sequenceThemeOptions
     return {}
   },
   computed: {
@@ -156,7 +153,16 @@ export default {
       isHtmlEnabled: state => state.preferences.isHtmlEnabled,
       isGitlabCompatibilityEnabled: state => state.preferences.isGitlabCompatibilityEnabled,
       sequenceTheme: state => state.preferences.sequenceTheme
-    })
+    }),
+    preferHeadingStyleOptions () {
+      return buildPreferHeadingStyleOptions(this.$t.bind(this))
+    },
+    listIndentationOptions () {
+      return buildListIndentationOptions(this.$t.bind(this))
+    },
+    sequenceThemeOptions () {
+      return buildSequenceThemeOptions(this.$t.bind(this))
+    }
   },
   methods: {
     onSelectChange (type, value) {

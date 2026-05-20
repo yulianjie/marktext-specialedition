@@ -1,0 +1,10 @@
+{
+  "title": "图片",
+  "defaultActionDesc": "从本地文件夹或剪贴板插入图片后的默认操作",
+  "clipboardNote": "剪贴板处理仅在 macOS 和 Windows 上完整支持。",
+  "actions": {
+    "upload": "通过选定的上传器上传到云端（需在下方配置）",
+    "copy": "复制到指定相对资源目录或全局本地文件夹",
+    "keep": "保持原位置"
+  }
+}

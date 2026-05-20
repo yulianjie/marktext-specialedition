@@ -1,0 +1,14 @@
+{
+  "title": "主题",
+  "customThemes": "自定义主题",
+  "fromFolder": "来自主题文件夹",
+  "autoSwitch": {
+    "desc": "根据系统设置自动调整应用主题",
+    "atStartup": "启动时调整主题",
+    "never": "从不"
+  },
+  "openFolderHelp": "打开自定义主题文件夹（将 .css 文件放入此文件夹）",
+  "openFolderBtn": "打开文件夹",
+  "reloadHelp": "重新扫描主题文件夹（无需重启即可加载新主题）",
+  "reloadBtn": "重新加载"
+}

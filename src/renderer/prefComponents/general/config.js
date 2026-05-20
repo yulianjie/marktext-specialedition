@@ -1,8 +1,8 @@
-export const titleBarStyleOptions = [{
-  label: 'Custom',
+export const buildTitleBarStyleOptions = t => [{
+  label: t('general.titleBar.custom'),
   value: 'custom'
 }, {
-  label: 'Native',
+  label: t('general.titleBar.native'),
   value: 'native'
 }]
 
@@ -47,18 +47,21 @@ export const zoomOptions = [{
   value: 2.0
 }]
 
-export const fileSortByOptions = [{
-  label: 'Creation time',
+export const buildFileSortByOptions = t => [{
+  label: t('general.fileSortBy.created'),
   value: 'created'
 }, {
-  label: 'Modification time',
+  label: t('general.fileSortBy.modified'),
   value: 'modified'
 }, {
-  label: 'Title',
+  label: t('general.fileSortBy.title'),
   value: 'title'
 }]
 
 export const languageOptions = [{
   label: 'English',
   value: 'en'
+}, {
+  label: '简体中文',
+  value: 'zh-CN'
 }]

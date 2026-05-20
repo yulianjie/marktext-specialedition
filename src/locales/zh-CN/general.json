@@ -1,0 +1,42 @@
+{
+  "title": "通用",
+  "sections": {
+    "autoSave": "自动保存：",
+    "window": "窗口：",
+    "sidebar": "侧边栏：",
+    "startUp": "启动时操作：",
+    "misc": "杂项："
+  },
+  "autoSave": {
+    "desc": "自动保存文档修改",
+    "delayDesc": "编辑后延迟多久自动保存"
+  },
+  "titleBar": {
+    "desc": "标题栏样式",
+    "notes": "需要重启生效。",
+    "custom": "自定义",
+    "native": "原生"
+  },
+  "hideScrollbar": "隐藏滚动条",
+  "openFilesInNewWindow": "在新窗口中打开文件",
+  "openFolderInNewWindow": "在新窗口中打开文件夹",
+  "zoom": "缩放",
+  "wordWrapInToc": "目录中自动换行",
+  "fileSortBy": {
+    "desc": "打开的文件夹中文件的排序字段",
+    "created": "创建时间",
+    "modified": "修改时间",
+    "title": "标题"
+  },
+  "startUp": {
+    "lastState": "打开上次编辑的内容",
+    "folder": "打开默认目录",
+    "blank": "打开空白页",
+    "selectFolder": "选择文件夹"
+  },
+  "language": {
+    "description": "界面语言",
+    "english": "English",
+    "chinese": "简体中文"
+  }
+}

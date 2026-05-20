@@ -1,6 +1,6 @@
 <template>
   <div class="pref-theme">
-    <h4>Theme</h4>
+    <h4>{{ $t('theme.title') }}</h4>
     <section class="offcial-themes">
       <div v-for="t of themes" :key="t.name" class="theme"
         :class="[t.name, { 'active': t.name === theme }]"
@@ -11,7 +11,7 @@
     </section>
 
     <template v-if="userThemes.length">
-      <h4 style="margin-top: 24px;">Custom Themes</h4>
+      <h4 style="margin-top: 24px;">{{ $t('theme.customThemes') }}</h4>
       <section class="offcial-themes user-themes">
         <div v-for="t of userThemes" :key="t.id" class="theme user-theme"
           :class="['type-' + t.type, { 'active': t.id === theme }]"
@@ -19,14 +19,14 @@
           :title="t.id"
         >
           <h3>{{ t.name }}</h3>
-          <p>来自主题文件夹</p>
+          <p>{{ $t('theme.fromFolder') }}</p>
         </div>
       </section>
     </template>
 
     <separator></separator>
     <cur-select
-      description="Automatically adjust application theme according to system settings"
+      :description="$t('theme.autoSwitch.desc')"
       :value="autoSwitchTheme"
       :options="autoSwitchThemeOptions"
       :onChange="value => onSelectChange('autoSwitchTheme', value)"
@@ -34,12 +34,12 @@
     <separator></separator>
     <section class="import-themes">
       <div>
-        <span>打开自定义主题文件夹（将 .css 文件放入此文件夹）</span>
-        <el-button size="small" @click="onOpenFolder">打开文件夹</el-button>
+        <span>{{ $t('theme.openFolderHelp') }}</span>
+        <el-button size="small" @click="onOpenFolder">{{ $t('theme.openFolderBtn') }}</el-button>
       </div>
       <div>
-        <span>重新扫描主题文件夹（无需重启即可加载新主题）</span>
-        <el-button size="small" @click="onReload">重新加载</el-button>
+        <span>{{ $t('theme.reloadHelp') }}</span>
+        <el-button size="small" @click="onReload">{{ $t('theme.reloadBtn') }}</el-button>
       </div>
     </section>
   </div>
@@ -49,7 +49,7 @@
 import { mapState } from 'vuex'
 import { ipcRenderer } from 'electron'
 import themeMd from './theme.md'
-import { autoSwitchThemeOptions, themes } from './config'
+import { buildAutoSwitchThemeOptions, themes } from './config'
 import markdownToHtml from '@/util/markdownToHtml'
 import CurSelect from '../common/select'
 import Separator from '../common/separator'
@@ -60,7 +60,6 @@ export default {
     Separator
   },
   data () {
-    this.autoSwitchThemeOptions = autoSwitchThemeOptions
     return {
       themes: [],
       userThemes: []
@@ -70,7 +69,10 @@ export default {
     ...mapState({
       autoSwitchTheme: state => state.preferences.autoSwitchTheme,
       theme: state => state.preferences.theme
-    })
+    }),
+    autoSwitchThemeOptions () {
+      return buildAutoSwitchThemeOptions(this.$t.bind(this))
+    }
   },
   created () {
     this.$nextTick(async () => {

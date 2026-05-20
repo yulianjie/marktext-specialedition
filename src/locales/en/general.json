@@ -1,0 +1,42 @@
+{
+  "title": "General",
+  "sections": {
+    "autoSave": "Auto Save:",
+    "window": "Window:",
+    "sidebar": "Sidebar:",
+    "startUp": "Action on startup:",
+    "misc": "Misc:"
+  },
+  "autoSave": {
+    "desc": "Automatically save document changes",
+    "delayDesc": "Delay following document edit before automatically saving"
+  },
+  "titleBar": {
+    "desc": "Title bar style",
+    "notes": "Requires restart.",
+    "custom": "Custom",
+    "native": "Native"
+  },
+  "hideScrollbar": "Hide scrollbars",
+  "openFilesInNewWindow": "Open files in new window",
+  "openFolderInNewWindow": "Open folders in new window",
+  "zoom": "Zoom",
+  "wordWrapInToc": "Wrap text in table of contents",
+  "fileSortBy": {
+    "desc": "Sort field for files in open folders",
+    "created": "Creation time",
+    "modified": "Modification time",
+    "title": "Title"
+  },
+  "startUp": {
+    "lastState": "Open the last edited content",
+    "folder": "Open the default directory",
+    "blank": "Open a blank page",
+    "selectFolder": "Select Folder"
+  },
+  "language": {
+    "description": "User interface language",
+    "english": "English",
+    "chinese": "简体中文"
+  }
+}

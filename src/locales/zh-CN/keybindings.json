@@ -1,0 +1,27 @@
+{
+  "title": "快捷键",
+  "instructions": "自定义 MarkText 快捷键，点击下方保存按钮应用全部更改（需要重启）。所有可用与默认的快捷键可在",
+  "online": "在线文档",
+  "columns": {
+    "description": "描述",
+    "key": "组合键",
+    "options": "操作"
+  },
+  "row": {
+    "edit": "编辑",
+    "reset": "重置",
+    "unbind": "解绑"
+  },
+  "buttons": {
+    "save": "保存",
+    "restoreDefaults": "恢复默认快捷键",
+    "debug": "导出键盘信息"
+  },
+  "debugHeading": "调试选项：",
+  "notify": {
+    "saveFailedTitle": "保存失败",
+    "saveError": "保存时发生意外错误。",
+    "inUseTitle": "快捷键已被占用",
+    "inUseMessage": "快捷键 \"{accelerator}\" 已被使用，请先解绑后再试。"
+  }
+}

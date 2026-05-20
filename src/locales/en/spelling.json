@@ -1,0 +1,21 @@
+{
+  "title": "Spelling",
+  "enable": "Enable spell checking",
+  "hideMarks": "Hide marks for spelling errors",
+  "autoDetect": "Automatically detect document language",
+  "defaultLang": "Default language for spell checking",
+  "osxNote": "The used language will be detected automatically while typing. Additional languages may be added through \"Language & Region\" in your system preferences pane.",
+  "customDict": {
+    "section": "Custom dictionary:",
+    "desc": "Edit words in custom dictionary.",
+    "empty": "No words available",
+    "word": "Word",
+    "options": "Options",
+    "delete": "Delete"
+  },
+  "notify": {
+    "switchFailedTitle": "Failed to switch language",
+    "removeFailedTitle": "Failed to remove custom word",
+    "saveError": "An unexpected error occurred while saving."
+  }
+}
